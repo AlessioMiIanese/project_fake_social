@@ -11,3 +11,44 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.vertical-menu {
+  width: 300px;
+  z-index: 1000;
+  background-color: #4CAF50;
+  /* Set a width if you like */
+}
+
+.container{
+    list-style-type: none;
+    margin-left: -20px;
+}
+
+.friendlist{
+  font-family: 'Times New Roman', Times, serif;
+}
+.user-list {
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: 600;
+}
+
+.user-data{
+font-family: 'Times New Roman', Times, serif;
+font-weight: normal;
+}
+
+
+
+
+#dropdown-content a {
+  text-decoration: none;
+  display: block;
+}
+
+#dropdown-content {
+  display: none;
+}
+
+#dropdown-content.show {
+  display: block;
+}
