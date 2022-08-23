@@ -52,3 +52,13 @@ font-weight: normal;
 #dropdown-content.show {
   display: block;
 }
+
+.flex{
+  display: inline-flex;
+}
+
+.button{
+    padding: 0px;
+      background-color: aqua;
+      margin-left: 10px;
+}

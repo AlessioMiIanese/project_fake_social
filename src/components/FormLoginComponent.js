@@ -8,6 +8,11 @@ const FormLoginComponent = ({
   email,
   setemail,
   password,
+  nameIsFound,
+  data,
+  checkMailIsFound,
+  OKOKOKOK,
+  setNameIsFound,
 }) => {
   useEffect(() => {
     // salvo i valori
@@ -15,10 +20,18 @@ const FormLoginComponent = ({
     localStorage.setItem("password", JSON.stringify(password));
   }, [email, password]);
 
+  // const onChangemail = (e) => {
+  //   setemail(e.target.value);
+  //   if (e.target.value !== data.email) {
+  //     alert("fuck you");
+  //   } else {
+  //     console.log("email is found yayaya");
+  //   }
+  // };
   return (
     <div>
       <h1> Welcome to Feisbuk!</h1>
-      <form onSubmit={(e) => showDataForm(e)}>
+      <form name="myForm" onSubmit={(e) => showDataForm(e)}>
         <label>Email:</label>
         <input
           type="text"
@@ -26,6 +39,7 @@ const FormLoginComponent = ({
           onChange={(e) => setemail(e.target.value)}
           placeholder="Insert your email"
           aria-label="Insert your email"
+          name="namemail"
         />
         <br />
         <label>Password:</label>
@@ -40,10 +54,27 @@ const FormLoginComponent = ({
           aria-label="Insert your password"
         />
         <br />
-        {!localStorage.getItem("email") && (
-          <input type="submit" value="Registrati"></input>
-        )}
-        {localStorage.getItem("email") && <button type="submit">Accedi</button>}
+        <div className="flex">
+          {!localStorage.getItem("email") && <input value="Registrati"></input>}
+
+          {!nameIsFound && (
+            <button type="submit" disabled={nameIsFound}>
+              Accedi
+            </button>
+          )}
+          {localStorage.getItem("email") && (
+            <div className="button" required onClick={() => OKOKOKOK()}>
+              Check Mail
+            </div>
+          )}
+          <div
+            className="button"
+            onClick={() => localStorage.setItem("email", JSON.stringify(email))}
+          >
+            {" "}
+            save mail peplaugh
+          </div>
+        </div>
       </form>
     </div>
   );

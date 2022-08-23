@@ -1,8 +1,34 @@
 const FriendListComponent = ({ data }) => {
+  {
+    // useEffect(() => {
+    //   data[0]?.map((data) => {
+    //     if (email !== data[y].email) {
+    //       setNameIsFound(false);
+    //       console.log("email1", email);
+    //       console.log("data.email", data.email);
+    //     } else {
+    //       console.log("mail FOUND POGGGGGERS");
+    //       setNameIsFound(true);
+    //     }
+    //   });
+    // }, [email]);
+    // useEffect(() => {
+    //   data[0]?.map((data) => {
+    //     if (email !== data[y].email) {
+    //       setNameIsFound(false);
+    //       console.log("email2", email);
+    //       console.log("data.email", data.email);
+    //     } else {
+    //       console.log("mail FOUND POGGGGGERS");
+    //       setNameIsFound(true);
+    //     }
+    //   });
+    // }, []);
+  }
+
   return (
     <div className="vertical-menu">
-      <span className="friendlist">
-        {" "}
+      <span className="friendlista">
         <h2>Friend List </h2>
       </span>
       {data[0]?.map((data) => {
