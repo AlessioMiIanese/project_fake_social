@@ -8,9 +8,13 @@ import PostList from "./PostList";
 import PaginationComponent from "./PaginationComponent";
 
 const Main = () => {
-  let emails = localStorage.getItem("email").replace(/['"]+/g, ""); // rimuovo apici inutili poco simpatici
+  let emails;
+  if (emails) {
+    emails = localStorage.getItem("email").replace(/['"]+/g, ""); // rimuovo apici inutili poco simpatici
+  }
   let y = 1;
   let i = 1;
+  let datiMom;
   const [n, setn] = useState(1);
   const [nameIsFound, setNameIsFound] = useState(false);
   const [numPage, setNumPage] = useState(11);
@@ -25,6 +29,7 @@ const Main = () => {
 
   const [data, setData] = useState([]);
   const [dataPost, setDataPost] = useState([]);
+  const [dataFriend, setDataFriend] = useState([]);
 
   const [email, setemail] = useState(() => {
     // mi prendo valori salvati
@@ -46,6 +51,7 @@ const Main = () => {
     // salvo i valori
     localStorage.setItem("email", JSON.stringify(email));
     localStorage.setItem("password", JSON.stringify(password));
+    y = 1;
   }, [email, password]);
 
   useEffect(() => {
@@ -75,7 +81,6 @@ const Main = () => {
   });
   const showDataForm = (e) => {
     e.preventDefault();
-    // checkAllData();
     checkMailIsFound();
     console.log("submittttttt");
   };
@@ -97,9 +102,9 @@ const Main = () => {
       toUsers.push(res.data);
       console.log("res.data", res.data);
 
-      setData(toUsers);
+      setDataFriend(toUsers);
       console.log("toUsers", toUsers);
-      console.log("data", data);
+      console.log("dataFriend", dataFriend);
     } catch (e) {
       console.log(e);
     }
@@ -108,63 +113,6 @@ const Main = () => {
   // show/hide friendlist
   const enableFriendList = () => {
     document.getElementById("dropdown-content").classList.toggle("show");
-  };
-
-  const OKOKOKOK = async () => {
-    let toPosts = [];
-    for (let y = 1; y < 11; y++) {
-      try {
-        const urlpost = `https://jsonplaceholder.typicode.com/users/${y}`;
-        const resPost = await axios.get(urlpost);
-        toPosts.push(resPost.data);
-        console.log("res.data POSTS call ", resPost.data);
-        console.log("email POSTS CALL", email);
-        setData(toPosts);
-        console.log("data POSTS CALL", data);
-
-        console.log("whats localstorage", localStorage.getItem("email"));
-
-        // data?.map((data) => {
-        //   if (localStorage.getItem("email") !== data[y].email) {
-        //     // console.log("tentativo di accedere con", data[y].email);
-        //     console.log("tentativo di accedere con", email);
-        //     //  alert("ACCES DENIED!");
-        //     setNameIsFound(false);
-        //   } else {
-        //     console.log("accesso con", email);
-        //     alert("Accesso Consentito");
-        //     setNameIsFound(true);
-        //   }
-        // });
-        data.forEach((data) => {
-          console.log("email foreach", email);
-          console.log(
-            "data[9999999999].email foreach DSJNVSDJSDù",
-            data[y - 1].email
-          );
-          console.log("COUNT y", y);
-          console.log(
-            "localStorage.getItem(email)",
-            localStorage.getItem("email")
-          );
-          // let emails = localStorage.getItem("email").replace(/['"]+/g, ""); // rimuovo apici inutili poco simpatici
-          console.log("emails", emails);
-          if (emails != data[y - 1].email) {
-            // console.log("tentativo di accedere con", data[y].email);
-            console.log("tentativo di accedere con", email);
-            //  alert("ACCES DENIED!");
-            setNameIsFound(false);
-          } else {
-            console.log("accesso con", email);
-            alert("Accesso Consentito");
-            setNameIsFound(true);
-            console.log("nameIsFound", nameIsFound);
-          }
-        });
-      } catch (e) {
-        console.log(e);
-      }
-    }
   };
 
   const getPosts = async (numPage) => {
@@ -197,55 +145,28 @@ const Main = () => {
     }
   }, [numPage]);
 
-  // tokens bs
-  const config = {
-    headers: {
-      header1: email,
-      header2: password,
-    },
-  };
-
-  const handleChange = (e) => {
-    if (e.target.value.trim() !== "") {
-      setData(e.target.value);
-    } else {
-      getPosts();
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    getSinglePost();
-  };
   let namemail;
   const checkMailIsFound = () => {
     namemail = document.forms["myForm"]["namemail"].value;
-    console.log("nameemail form", namemail);
-    setNameIsFound(true);
-    console.log("nameIsFound FORMMMMMMMMMMMMMMM", nameIsFound);
-    // if ( nameIsFound=== 'true') {
-    //   // setNameIsFound(false);
-    //   console.log("NO MAIL FOUND", namemail);
-    //   console.log("nameIsFound", nameIsFound);
-    // } else {
-    //   //  setNameIsFound(true);
-    //   console.log("MAIL FOUND ", namemail);
-    //   console.log("nameIsFound", nameIsFound);
-    // }
+    checkLogIn();
   };
 
-  const getSinglePost = async (postPerPage) => {
-    let toArray = [];
-    let i = 1;
-    for (numPage - i; i < numPage; i++) {
+  const checkLogIn = async () => {
+    let toPosts = [];
+    for (let y = 1; y < 11; y++) {
       try {
-        const url = `https://jsonplaceholder.typicode.com/posts/${i}?limit=(${i}+1)*10&offset=(${i}*10)`;
-        const res = await axios.get(url);
-        toArray.push(res.data);
-        console.log("res.data", res.data);
-        setData(toArray);
-        console.log("toArray".toArray);
-        console.log("data", data);
+        const urlpost = `https://jsonplaceholder.typicode.com/users/${y}`;
+        const resPost = await axios.get(urlpost);
+        toPosts.push(resPost.data);
+        setData(toPosts);
+        datiMom = resPost.data;
+        if (namemail === datiMom.email) {
+          localStorage.setItem("email", JSON.stringify(email));
+          setNameIsFound(true);
+          alert("Acceso Permesso");
+        } else {
+          console.log("controllando i permessi");
+        }
       } catch (e) {
         console.log(e);
       }
@@ -265,7 +186,6 @@ const Main = () => {
             setpassword={setpassword}
             nameIsFound={nameIsFound}
             data={data}
-            OKOKOKOK={OKOKOKOK}
             setNameIsFound={setNameIsFound}
           />
         )}
@@ -277,7 +197,7 @@ const Main = () => {
             </button>
             <div id="dropdown-content" className="show-hide-menu">
               <FriendListComponent
-                data={data}
+                dataFriend={dataFriend}
                 email={email}
                 useEffect={useEffect}
                 setNameIsFound={setNameIsFound}

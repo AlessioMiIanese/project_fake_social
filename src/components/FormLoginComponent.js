@@ -3,16 +3,12 @@ import { useState, useEffect } from "react";
 const FormLoginComponent = ({
   logOut,
   showDataForm,
-  changeUserData,
   setpassword,
   email,
   setemail,
   password,
   nameIsFound,
-  data,
-  checkMailIsFound,
   OKOKOKOK,
-  setNameIsFound,
 }) => {
   useEffect(() => {
     // salvo i valori
@@ -62,18 +58,6 @@ const FormLoginComponent = ({
               Accedi
             </button>
           )}
-          {localStorage.getItem("email") && (
-            <div className="button" required onClick={() => OKOKOKOK()}>
-              Check Mail
-            </div>
-          )}
-          <div
-            className="button"
-            onClick={() => localStorage.setItem("email", JSON.stringify(email))}
-          >
-            {" "}
-            save mail peplaugh
-          </div>
         </div>
       </form>
     </div>
