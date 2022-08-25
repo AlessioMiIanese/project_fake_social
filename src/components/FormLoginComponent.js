@@ -51,8 +51,6 @@ const FormLoginComponent = ({
         />
         <br />
         <div className="flex">
-          {!localStorage.getItem("email") && <input value="Registrati"></input>}
-
           {!nameIsFound && (
             <button type="submit" disabled={nameIsFound}>
               Accedi

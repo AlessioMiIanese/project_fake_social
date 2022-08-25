@@ -50,6 +50,9 @@ const Main = () => {
     emails = localStorage.getItem("email").replace(/['"]+/g, ""); // rimuovo apici inutili poco simpatici
     getAllUsers();
     getPosts(11);
+    if (emails) {
+      setNameIsFound(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -84,6 +87,7 @@ const Main = () => {
   const logOut = (email) => {
     localStorage.removeItem("email");
     localStorage.removeItem("password");
+    setNameIsFound(false);
   };
 
   const getAllUsers = async () => {
@@ -185,7 +189,7 @@ const Main = () => {
   return (
     <>
       <div className="App">
-        {!nameIsFound && (
+        {!nameIsFound && !emails && (
           <FormLoginComponent
             showDataForm={showDataForm}
             email={email}
