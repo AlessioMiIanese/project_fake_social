@@ -1,46 +1,32 @@
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
-const PaginationComponent = ({
-  n,
-  plusN,
-  minusN,
-  targetN,
-  numPage,
-  changePageDown,
-  changePageUp,
-}) => {
+const PaginationComponent = ({ plusN, numPage, setNumPage }) => {
   return (
     <>
-      {n < 6 && (
+      {numPage < 40 && (
         <div>
-          <button onClick={() => targetN(1)}>1</button>
-          <button onClick={() => targetN(2)}>2</button>
-          <button onClick={() => targetN(3)}>3</button>
-          <button onClick={() => targetN(4)}>4</button>
-          <button onClick={() => plusN(numPage)}>Show All Posts</button>
+          <button onClick={() => setNumPage(11)}>1</button>
+          <button onClick={() => setNumPage(21)}>2</button>
+          <button onClick={() => setNumPage(31)}>3</button>
+          <button onClick={() => setNumPage(41)}>4</button>
         </div>
       )}
 
-      {n > 6 && (
+      {numPage > 40 && (
         <div>
-          <button onClick={() => minusN(numPage)}>Prev</button>
-          <button onClick={() => targetN(5)}>5</button>
-          <button onClick={() => targetN(6)}>6</button>
-          <button onClick={() => targetN(7)}>7</button>
-          <button onClick={() => targetN(8)}>8</button>
-          <button onClick={() => targetN(9)}>9</button>
-          <button onClick={() => targetN(10)}>10</button>
+          <button onClick={() => setNumPage(51)}>5</button>
+          <button onClick={() => setNumPage(61)}>6</button>
+          <button onClick={() => setNumPage(71)}>7</button>
+          <button onClick={() => setNumPage(81)}>8</button>
+          <button onClick={() => setNumPage(91)}>9</button>
+          <button onClick={() => setNumPage(101)}>10</button>
         </div>
       )}
 
-      <div>
-        {numPage > 10 && (
-          <button onClick={() => changePageDown()}>Show Less</button>
-        )}
-        {numPage < 100 && (
-          <button onClick={() => changePageUp()}>Load More Posts</button>
-        )}
-      </div>
+      <button onClick={() => setNumPage(numPage - 10)}>Prev</button>
+      <button onClick={() => setNumPage(numPage + 10)}>Next</button>
+
+      <button onClick={() => plusN(numPage)}>Show All Posts</button>
     </>
   );
 };

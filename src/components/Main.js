@@ -18,14 +18,6 @@ const Main = () => {
   const [n, setn] = useState(1);
   const [nameIsFound, setNameIsFound] = useState(false);
   const [numPage, setNumPage] = useState(11);
-  const changePageUp = () => {
-    setNumPage(numPage + 10);
-    getPosts(numPage);
-  };
-  const changePageDown = () => {
-    setNumPage(numPage - 10);
-    getPosts(numPage);
-  };
 
   const [data, setData] = useState([]);
   const [dataPost, setDataPost] = useState([]);
@@ -57,11 +49,11 @@ const Main = () => {
   useEffect(() => {
     emails = localStorage.getItem("email").replace(/['"]+/g, ""); // rimuovo apici inutili poco simpatici
     getAllUsers();
-    getPosts();
+    getPosts(11);
   }, []);
 
   useEffect(() => {
-    getPosts();
+    getPosts(numPage);
   }, [numPage]);
 
   const targetN = (numPage) => {
@@ -69,11 +61,11 @@ const Main = () => {
   };
 
   const plusN = (numPage) => {
-    setData(numPage + 1);
+    setData(numPage + 10);
   };
 
   const minusN = (numPage) => {
-    setData(numPage - 1);
+    setData(numPage - 10);
   };
   const [user, setUser] = useState({
     email: email,
@@ -115,11 +107,29 @@ const Main = () => {
     document.getElementById("dropdown-content").classList.toggle("show");
   };
 
+  // const getPosts = async (numPage) => {
+  //   let toPosts = [];
+  //   for (numPage - i; i < numPage; i++) {
+  //     try {
+  //       const urlpost = `https://jsonplaceholder.typicode.com/posts/${i}?limit=(${i}+1)*10&offset=(${i}*10)`;
+  //       const resPost = await axios.get(urlpost);
+  //       toPosts.push(resPost.data);
+  //       console.log("res.data POSTS", resPost.data);
+
+  //       setDataPost(toPosts);
+  //       console.log("toPosts", toPosts);
+  //       console.log("dataPost", dataPost);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   }
+  // };
+
   const getPosts = async (numPage) => {
     let toPosts = [];
-    for (numPage - i; i < numPage; i++) {
+    for (let k = 0; k < numPage; k++) {
       try {
-        const urlpost = `https://jsonplaceholder.typicode.com/posts/${i}?limit=(${i}+1)*10&offset=(${i}*10)`;
+        const urlpost = `https://jsonplaceholder.typicode.com/posts/${k}?limit=10&offset=100`;
         const resPost = await axios.get(urlpost);
         toPosts.push(resPost.data);
         console.log("res.data POSTS", resPost.data);
@@ -132,7 +142,6 @@ const Main = () => {
       }
     }
   };
-
   useEffect(() => {
     let index = 1;
     for (numPage - index; index < numPage; index++) {
@@ -202,6 +211,7 @@ const Main = () => {
                 useEffect={useEffect}
                 setNameIsFound={setNameIsFound}
                 y={y}
+                namemail={namemail}
               />
             </div>
             <button onClick={() => logOut()}>Log Out</button>
@@ -210,23 +220,28 @@ const Main = () => {
               <h1> psw: {user.password}</h1>
             </div>
             lista di post
-            <PostList dataPost={dataPost} i={i} data={data} />
+            <PostList
+              dataPost={dataPost}
+              numPage={numPage}
+              data={data}
+              getPosts={getPosts}
+            />
+            <br />
+            <br />
+            <br />
+            <PaginationComponent
+              targetN={targetN}
+              n={n}
+              plusN={plusN}
+              minusN={minusN}
+              numPage={numPage}
+              setNumPage={setNumPage}
+            />
           </div>
         )}
+
         <br />
         <br />
-        <br />
-        <br />
-        <br />
-        <PaginationComponent
-          targetN={targetN}
-          n={n}
-          plusN={plusN}
-          minusN={minusN}
-          numPage={numPage}
-          changePageDown={changePageDown}
-          changePageUp={changePageUp}
-        />
       </div>
     </>
   );

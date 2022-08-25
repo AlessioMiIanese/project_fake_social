@@ -1,4 +1,8 @@
-const PostList = ({ dataPost, i, data }) => {
+import { useEffect } from "react";
+const PostList = ({ dataPost, numPage, data, getPosts }) => {
+  useEffect(() => {
+    getPosts(numPage);
+  }, [numPage]);
   return (
     <div className="postList">
       <span className="post">
@@ -9,41 +13,89 @@ const PostList = ({ dataPost, i, data }) => {
         return (
           <div className="container" key={dataPost?.id}>
             <div className="container">
-              <div>
-                {(dataPost.userId = 1 && dataPost.userId === data?.id) && (
-                  <span>Leanne Graham </span>
-                )}
-                {(dataPost.userId = 2 && dataPost.userId === data?.id) && (
-                  <span>Ervin Howell" </span>
-                )}
-                {(dataPost.userId = 3 && dataPost.userId === data?.id) && (
-                  <span>Clementine Bauch </span>
-                )}
-                {(dataPost.userId = 4 && dataPost.userId === data?.id) && (
-                  <span>Patricia Lebsack</span>
-                )}
-                {(dataPost.userId = 5 && dataPost.userId === data?.id) && (
-                  <span>Chelsey Dietrich </span>
-                )}
-                {(dataPost.userId = 6 && dataPost.userId === data?.id) && (
-                  <span>Mrs. Dennis Schulist</span>
-                )}
-                {(dataPost.userId = 7 && dataPost.userId === data?.id) && (
-                  <span>Kurtis Weissnat </span>
-                )}
-                {(dataPost.userId = 8 && dataPost.userId === data?.id) && (
-                  <span>Nicholas Runolfsdottir V</span>
-                )}
-                {(dataPost.userId = 9 && dataPost.userId === data?.id) && (
-                  <span>Glenna Reichert </span>
-                )}
-                {(dataPost.userId = 10 && dataPost.userId === data?.id) && (
-                  <span>Clementina DuBuque</span>
-                )}
-              </div>
+              {dataPost.userId === 1 && (
+                <div>
+                  <p className="user-list">
+                    Author:
+                    <span className="user-data">Leanne Graham </span>
+                  </p>
+                </div>
+              )}
+              {dataPost.userId === 2 && (
+                <div>
+                  <p className="user-list">
+                    Author:
+                    <span className="user-data">Ervin Howell</span>
+                  </p>
+                </div>
+              )}
+              {dataPost.userId === 3 && (
+                <div>
+                  <p className="user-list">
+                    Author:
+                    <span className="user-data">Clementine Bauch</span>
+                  </p>
+                </div>
+              )}
+              {dataPost.userId === 4 && (
+                <div>
+                  <p className="user-list">
+                    Author:
+                    <span className="user-data">Patricia Lebsack</span>
+                  </p>
+                </div>
+              )}
+              {dataPost.userId === 5 && (
+                <div>
+                  <p className="user-list">
+                    Author:
+                    <span className="user-data">Chelsey Dietrich</span>
+                  </p>
+                </div>
+              )}
+              {dataPost.userId === 6 && (
+                <div>
+                  <p className="user-list">
+                    Author:
+                    <span className="user-data">Mrs. Dennis Schulist</span>
+                  </p>
+                </div>
+              )}
+              {dataPost.userId === 7 && (
+                <div>
+                  <p className="user-list">
+                    Author:
+                    <span className="user-data">Kurtis Weissnat</span>
+                  </p>
+                </div>
+              )}
+              {dataPost.userId === 8 && (
+                <div>
+                  <p className="user-list">
+                    Author:
+                    <span className="user-data">Nicholas Runolfsdottir V</span>
+                  </p>
+                </div>
+              )}
+              {dataPost.userId === 9 && (
+                <div>
+                  <p className="user-list">
+                    Author:
+                    <span className="user-data">Glenna Reichert</span>
+                  </p>
+                </div>
+              )}
+              {dataPost.userId === 10 && (
+                <div>
+                  <p className="user-list">
+                    Author:
+                    <span className="user-data">Clementina DuBuque</span>
+                  </p>
+                </div>
+              )}
 
               <p className="user-list">
-                Title: <span className="user-data">Post N: {dataPost?.id}</span>
+                Post N: <span className="user-data"> {dataPost?.id}</span>
               </p>
               <p className="user-list">
                 Title: <span className="user-data">{dataPost?.title}</span>
