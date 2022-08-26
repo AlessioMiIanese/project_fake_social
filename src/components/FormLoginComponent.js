@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 
 const FormLoginComponent = ({
-  logOut,
   showDataForm,
   setpassword,
   email,
   setemail,
   password,
-  nameIsFound,
-  OKOKOKOK,
+  setNameIsFound,
 }) => {
   useEffect(() => {
     // salvo i valori
@@ -16,19 +14,11 @@ const FormLoginComponent = ({
     localStorage.setItem("password", JSON.stringify(password));
   }, [email, password]);
 
-  // const onChangemail = (e) => {
-  //   setemail(e.target.value);
-  //   if (e.target.value !== data.email) {
-  //     alert("fuck you");
-  //   } else {
-  //     console.log("email is found yayaya");
-  //   }
-  // };
   return (
-    <div>
-      <h1> Welcome to Feisbuk!</h1>
+    <div className="postList">
+      <h1 className="app-title"> Welcome to Distort!</h1>
       <form name="myForm" onSubmit={(e) => showDataForm(e)}>
-        <label>Email:</label>
+        <label className="label-login">Email:</label>
         <input
           type="text"
           value={email}
@@ -38,7 +28,7 @@ const FormLoginComponent = ({
           name="namemail"
         />
         <br />
-        <label>Password:</label>
+        <label className="label-login">Password:</label>
 
         <input
           onChange={(e) => setpassword(e.target.value)}
@@ -51,9 +41,13 @@ const FormLoginComponent = ({
         />
         <br />
         <div className="flex">
-          {!nameIsFound && (
-            <button type="submit" disabled={nameIsFound}>
-              Accedi
+          {!setNameIsFound && (
+            <button
+              className="button-login"
+              type="submit"
+              disabled={setNameIsFound}
+            >
+              Log in
             </button>
           )}
         </div>

@@ -12,11 +12,33 @@ code {
     monospace;
 }
 
+.App{
+  background-color: beige;
+}
+
+.app-title{
+  font-family: 'Times New Roman', Times, serif;
+  color: rgba(71, 71, 107, 0.466);
+}
+
+.label-login{
+  font-family: 'Times New Roman', Times, serif;
+    color: rgba(145, 145, 176, 0.966);
+}
+
 .vertical-menu {
   width: 300px;
   z-index: 1000;
-  background-color: #4CAF50;
-  /* Set a width if you like */
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(71, 105, 147);
+  border-right: 2px solid black ;
+  position: -webkit-sticky;
+    /* Safari */
+    position: sticky;
+  top: 0;
+  left: 0;
+  transition: 0.5s;
 }
 
 .container{
@@ -37,9 +59,6 @@ font-family: 'Times New Roman', Times, serif;
 font-weight: normal;
 }
 
-
-
-
 #dropdown-content a {
   text-decoration: none;
   display: block;
@@ -56,9 +75,128 @@ font-weight: normal;
 .flex{
   display: inline-flex;
 }
+.user-pro{
+  width: 40px;
+  height: 40px;
+  position: relative;
+  right: 80px;
+}
 
-.button{
-    padding: 0px;
-      background-color: aqua;
-      margin-left: 10px;
+.user-propic {
+  width: 40px;
+  height: 40px;
+}
+
+.all-users{
+  font-family: 'Times New Roman', Times, serif;
+  color: rgb(247, 115, 0)
+}
+
+
+.button-login{
+  color: rgb(104, 85, 224);
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(104, 85, 224, 1);
+  position: relative;
+  top: 10px;
+  padding: 5px;
+
+}
+
+.button-login:hover {
+  color: white;
+    box-shadow: 0 0 20px rgba(104, 85, 224, 0.6);
+    background-color: rgba(104, 85, 224, 1);
+}
+
+.button-show{
+   background-color: #4CAF50; 
+  background: rgb(27, 240, 76);
+}
+
+.button-logout{
+  background-color: red;
+  background: rgb(252, 16, 16);
+}
+
+.button-pagination{
+  background: rgb(66, 184, 221);
+}
+
+.postList{
+  background-color: beige;
+  font-family: 'Times New Roman', Times, serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.post-title{
+font-family: 'Times New Roman', Times, serif;
+}
+.your-data{
+  font-family: 'Times New Roman', Times, serif;
+  color: rgb(23, 23, 116);
+}
+
+.post-author{
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+  font-weight: lighter;
+}
+
+.user-loggedin{
+font-family: 'Times New Roman', Times, serif;
+font-style: italic;
+font-weight: bolder;
+color:#07840b;
+}
+.user-psw{
+font-family: 'Times New Roman', Times, serif;
+font-style: italic;
+font-weight: bolder;
+color: rgb(73, 13, 130);
+}
+.body{
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.card{
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+  font-family: 'Times New Roman', Times, serif;
+  margin-bottom: 5%;
+  border: 2px solid black; */
+      box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+        transition: 0.3s;
+        border-radius: 5px;
+        font-family: 'Times New Roman', Times, serif;
+        margin-bottom: 5%;
+        border: 2px solid black;
+        width: 40%;
+        
+}
+
+.box{
+  border-bottom: 2px solid black;
+  transition: 0.3s;
+  font-family: 'Times New Roman', Times, serif;
+  background-color: rgb(120, 155, 198);
+}
+
+.friendlist-container{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+  font-family: 'Times New Roman', Times, serif;
+  
+  border-top: 2px solid black;
+  background-color: lightblue;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  background-color: rgb(247, 247, 143);
 }

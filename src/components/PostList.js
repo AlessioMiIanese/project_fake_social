@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-const PostList = ({ dataPost, numPage, data, getPosts }) => {
+const PostList = ({ dataPost, numPage, getPosts }) => {
   useEffect(() => {
     getPosts(numPage);
   }, [numPage]);
@@ -11,13 +11,16 @@ const PostList = ({ dataPost, numPage, data, getPosts }) => {
       </span>
       {dataPost?.map((dataPost) => {
         return (
-          <div className="container" key={dataPost?.id}>
+          <div className="card" key={dataPost?.id}>
             <div className="container">
               {dataPost.userId === 1 && (
                 <div>
+                  <div className="user-list">
+                    <h3 className="post-title">{dataPost?.title}</h3>
+                  </div>
                   <p className="user-list">
                     Author:
-                    <span className="user-data">Leanne Graham </span>
+                    <span className="post-author">Leanne Graham </span>
                   </p>
                 </div>
               )}
@@ -25,7 +28,7 @@ const PostList = ({ dataPost, numPage, data, getPosts }) => {
                 <div>
                   <p className="user-list">
                     Author:
-                    <span className="user-data">Ervin Howell</span>
+                    <span className="post-author">Ervin Howell</span>
                   </p>
                 </div>
               )}
@@ -33,7 +36,7 @@ const PostList = ({ dataPost, numPage, data, getPosts }) => {
                 <div>
                   <p className="user-list">
                     Author:
-                    <span className="user-data">Clementine Bauch</span>
+                    <span className="post-author">Clementine Bauch</span>
                   </p>
                 </div>
               )}
@@ -41,7 +44,7 @@ const PostList = ({ dataPost, numPage, data, getPosts }) => {
                 <div>
                   <p className="user-list">
                     Author:
-                    <span className="user-data">Patricia Lebsack</span>
+                    <span className="post-author">Patricia Lebsack</span>
                   </p>
                 </div>
               )}
@@ -49,7 +52,7 @@ const PostList = ({ dataPost, numPage, data, getPosts }) => {
                 <div>
                   <p className="user-list">
                     Author:
-                    <span className="user-data">Chelsey Dietrich</span>
+                    <span className="post-author">Chelsey Dietrich</span>
                   </p>
                 </div>
               )}
@@ -57,7 +60,7 @@ const PostList = ({ dataPost, numPage, data, getPosts }) => {
                 <div>
                   <p className="user-list">
                     Author:
-                    <span className="user-data">Mrs. Dennis Schulist</span>
+                    <span className="post-author">Mrs. Dennis Schulist</span>
                   </p>
                 </div>
               )}
@@ -65,7 +68,7 @@ const PostList = ({ dataPost, numPage, data, getPosts }) => {
                 <div>
                   <p className="user-list">
                     Author:
-                    <span className="user-data">Kurtis Weissnat</span>
+                    <span className="post-author">Kurtis Weissnat</span>
                   </p>
                 </div>
               )}
@@ -73,7 +76,9 @@ const PostList = ({ dataPost, numPage, data, getPosts }) => {
                 <div>
                   <p className="user-list">
                     Author:
-                    <span className="user-data">Nicholas Runolfsdottir V</span>
+                    <span className="post-author">
+                      Nicholas Runolfsdottir V
+                    </span>
                   </p>
                 </div>
               )}
@@ -81,7 +86,7 @@ const PostList = ({ dataPost, numPage, data, getPosts }) => {
                 <div>
                   <p className="user-list">
                     Author:
-                    <span className="user-data">Glenna Reichert</span>
+                    <span className="post-author">Glenna Reichert</span>
                   </p>
                 </div>
               )}
@@ -89,18 +94,16 @@ const PostList = ({ dataPost, numPage, data, getPosts }) => {
                 <div>
                   <p className="user-list">
                     Author:
-                    <span className="user-data">Clementina DuBuque</span>
+                    <span className="post-author">Clementina DuBuque</span>
                   </p>
                 </div>
               )}
 
               <p className="user-list">
-                Post N: <span className="user-data"> {dataPost?.id}</span>
+                Post n°: <span className="user-data"> {dataPost?.id}</span>
               </p>
-              <p className="user-list">
-                Title: <span className="user-data">{dataPost?.title}</span>
-              </p>
-              <p className="user-list">
+
+              <p className="user-list body">
                 body: <span className="user-data">{dataPost?.body}</span>
               </p>
             </div>

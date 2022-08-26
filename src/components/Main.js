@@ -12,8 +12,6 @@ const Main = () => {
   if (emails) {
     emails = localStorage.getItem("email").replace(/['"]+/g, ""); // rimuovo apici inutili poco simpatici
   }
-  let y = 1;
-  let i = 1;
   let datiMom;
   const [n, setn] = useState(1);
   const [nameIsFound, setNameIsFound] = useState(false);
@@ -43,7 +41,7 @@ const Main = () => {
     // salvo i valori
     localStorage.setItem("email", JSON.stringify(email));
     localStorage.setItem("password", JSON.stringify(password));
-    y = 1;
+    setUser({ email: email, password: password });
   }, [email, password]);
 
   useEffect(() => {
@@ -52,6 +50,7 @@ const Main = () => {
     getPosts(11);
     if (emails) {
       setNameIsFound(true);
+      setUser({ email: email, password: password });
     }
   }, []);
 
@@ -77,16 +76,15 @@ const Main = () => {
   const showDataForm = (e) => {
     e.preventDefault();
     checkMailIsFound();
-    console.log("submittttttt");
   };
 
-  const changeUserData = (key, value) => {
-    setUser({ ...user, [key]: value });
-  };
-
-  const logOut = (email) => {
-    localStorage.removeItem("email");
+  const logOut = () => {
+    window.localStorage.removeItem(email);
+    window.localStorage.removeItem("email");
     localStorage.removeItem("password");
+    emails = "";
+    namemail = localStorage.setItem("email", JSON.stringify(email));
+    localStorage.clear();
     setNameIsFound(false);
   };
 
@@ -96,11 +94,7 @@ const Main = () => {
       const url = `https://jsonplaceholder.typicode.com/users`;
       const res = await axios.get(url);
       toUsers.push(res.data);
-      console.log("res.data", res.data);
-
       setDataFriend(toUsers);
-      console.log("toUsers", toUsers);
-      console.log("dataFriend", dataFriend);
     } catch (e) {
       console.log(e);
     }
@@ -111,36 +105,14 @@ const Main = () => {
     document.getElementById("dropdown-content").classList.toggle("show");
   };
 
-  // const getPosts = async (numPage) => {
-  //   let toPosts = [];
-  //   for (numPage - i; i < numPage; i++) {
-  //     try {
-  //       const urlpost = `https://jsonplaceholder.typicode.com/posts/${i}?limit=(${i}+1)*10&offset=(${i}*10)`;
-  //       const resPost = await axios.get(urlpost);
-  //       toPosts.push(resPost.data);
-  //       console.log("res.data POSTS", resPost.data);
-
-  //       setDataPost(toPosts);
-  //       console.log("toPosts", toPosts);
-  //       console.log("dataPost", dataPost);
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   }
-  // };
-
   const getPosts = async (numPage) => {
     let toPosts = [];
-    for (let k = 0; k < numPage; k++) {
+    for (let k = 1; k < numPage; k++) {
       try {
         const urlpost = `https://jsonplaceholder.typicode.com/posts/${k}?limit=10&offset=100`;
         const resPost = await axios.get(urlpost);
         toPosts.push(resPost.data);
-        console.log("res.data POSTS", resPost.data);
-
         setDataPost(toPosts);
-        console.log("toPosts", toPosts);
-        console.log("dataPost", dataPost);
       } catch (e) {
         console.log(e);
       }
@@ -149,12 +121,8 @@ const Main = () => {
   useEffect(() => {
     let index = 1;
     for (numPage - index; index < numPage; index++) {
-      // const element = array[i];
       setData([]);
       getPosts();
-      // checkMailIsFound();
-      // controlType(pokemonData);
-      // setPokemonData(pokemonData.map((pokemon) => pokemon.id));
     }
   }, [numPage]);
 
@@ -176,13 +144,17 @@ const Main = () => {
         if (namemail === datiMom.email) {
           localStorage.setItem("email", JSON.stringify(email));
           setNameIsFound(true);
-          alert("Acceso Permesso");
+          console.log("nameIsFound", nameIsFound);
+          alert("Acces Allowed");
         } else {
-          console.log("controllando i permessi");
+          console.log("checking permissions...");
         }
       } catch (e) {
         console.log(e);
       }
+    }
+    if (!nameIsFound) {
+      alert(nameIsFound);
     }
   };
 
@@ -190,46 +162,48 @@ const Main = () => {
     <>
       <div className="App">
         {!nameIsFound && !emails && (
-          <FormLoginComponent
-            showDataForm={showDataForm}
-            email={email}
-            password={password}
-            setemail={setemail}
-            changeUserData={changeUserData}
-            setpassword={setpassword}
-            nameIsFound={nameIsFound}
-            data={data}
-            setNameIsFound={setNameIsFound}
-          />
+          <div className="big-container">
+            <FormLoginComponent
+              showDataForm={showDataForm}
+              email={email}
+              password={password}
+              setemail={setemail}
+              setpassword={setpassword}
+              nameIsFound={nameIsFound}
+            />
+          </div>
         )}
 
         {nameIsFound && (
-          <div>
-            <button onClick={() => enableFriendList()}>
+          <div className="big-container">
+            <button className="button-show" onClick={() => enableFriendList()}>
               Show/Hide FriendList
             </button>
-            <div id="dropdown-content" className="show-hide-menu">
-              <FriendListComponent
-                dataFriend={dataFriend}
-                email={email}
-                useEffect={useEffect}
-                setNameIsFound={setNameIsFound}
-                y={y}
-                namemail={namemail}
+            <button className="button-logout" onClick={() => logOut()}>
+              Log Out
+            </button>
+            <div className="flex">
+              <div id="dropdown-content" className="show-hide-menu">
+                <FriendListComponent
+                  dataFriend={dataFriend}
+                  email={email}
+                  namemail={namemail}
+                  user={user}
+                />
+              </div>
+
+              {/* <div>
+                <h1> Utente Loggato: {user.email} </h1>
+                <h1> psw: {user.password}</h1>
+              </div> */}
+
+              <PostList
+                dataPost={dataPost}
+                numPage={numPage}
+                data={data}
+                getPosts={getPosts}
               />
             </div>
-            <button onClick={() => logOut()}>Log Out</button>
-            <div>
-              <h1> Utente Loggato: {user.email} </h1>
-              <h1> psw: {user.password}</h1>
-            </div>
-            lista di post
-            <PostList
-              dataPost={dataPost}
-              numPage={numPage}
-              data={data}
-              getPosts={getPosts}
-            />
             <br />
             <br />
             <br />
